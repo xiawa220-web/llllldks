@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --background: 255 255 255;
+  --foreground: 17 24 39;
+  --primary: 37 99 235; /* 全局蓝色 #2563eb */
+  --muted: 107 114 128;
+  --card: 255 255 255;
+  --border: 229 231 235;
+}
+body{ background-color: rgb(var(--background)); color: rgb(var(--foreground)); }
+
+.brand{ font-size: 28px; font-weight: 800; letter-spacing:.5px; }
+.brand-gradient{ background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%); -webkit-background-clip: text; color: transparent; }
+.subtitle{ color: rgb(var(--muted)); font-size: 12px; }
+
+.bento{
+  display:grid; gap:12px; grid-template-columns: repeat(12, 1fr);
+}
+.card{ border:1px solid rgb(var(--border)); border-radius:12px; background: rgb(var(--card)); padding:16px; }
+.btn{ background: rgb(var(--primary)); color:#fff; border:none; padding:10px 16px; border-radius:12px; font-weight:600; }
+.btn:disabled{ opacity:.6; }
+.input{ border:1px solid rgb(var(--border)); border-radius:12px; padding:12px 16px; font-size:16px; }
+.input-lg{ padding:16px 18px; font-size:18px; }
+.muted{ color: rgb(var(--muted)); }
+.chip{ display:inline-flex; align-items:center; gap:6px; border:1px solid rgb(var(--border)); border-radius:999px; padding:4px 10px; font-size:12px; }
+.spinner{ width:18px; height:18px; border-radius:50%; border:2px solid rgba(37,99,235,.3); border-top-color: rgba(37,99,235,1); animation:spin .8s linear infinite; }
+@keyframes spin{ to { transform: rotate(360deg); } }
+
+/* 页面容器与两列布局 */
+.page{ max-width: 1100px; margin: 0 auto; padding: 16px; }
+.grid-2{ display:grid; gap:12px; grid-template-columns: 1fr; }
+@media (min-width: 768px){
+  .grid-2{ grid-template-columns: 1fr 1fr; }
+}
