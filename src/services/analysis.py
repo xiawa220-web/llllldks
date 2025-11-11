@@ -129,7 +129,8 @@ def build_report(topic: str, docs: list[dict]) -> dict:
         "risks": risk_sents,
         "opportunities": oppo_templates,
         "sources_used": sources,
-        "domain_table": domain_table
+        "domain_table": domain_table,
+        "trend_points": build_trend(docs)
     }
     return report
 
@@ -217,17 +218,17 @@ def render_html(report: dict) -> str:
 
     html = f"""
     <style>
-      .article{ line-height:1.75; }
-      h1,h2,h3{ font-weight:600; }
-      .muted{ color:#6b7280; font-size:13px; }
-      ul{ padding-left:18px; }
-      .barbox{ display:flex; gap:8px; align-items:center; margin:8px 0; }
-      .bar{ height:12px; border-radius:6px; }
-      .pos{ background:#10b981; width:{pos_pct}%; }
-      .neg{ background:#ef4444; width:{neg_pct}%; }
-      table{ width:100%; border-collapse:collapse; }
-      th,td{ border:1px solid #e5e7eb; padding:8px; text-align:left; font-size:14px; }
-      .num{ text-align:right; }
+      .article{{ line-height:1.75; }}
+      h1,h2,h3{{ font-weight:600; }}
+      .muted{{ color:#6b7280; font-size:13px; }}
+      ul{{ padding-left:18px; }}
+      .barbox{{ display:flex; gap:8px; align-items:center; margin:8px 0; }}
+      .bar{{ height:12px; border-radius:6px; }}
+      .pos{{ background:#10b981; width:{pos_pct}%; }}
+      .neg{{ background:#ef4444; width:{neg_pct}%; }}
+      table{{ width:100%; border-collapse:collapse; }}
+      th,td{{ border:1px solid #e5e7eb; padding:8px; text-align:left; font-size:14px; }}
+      .num{{ text-align:right; }}
     </style>
     <article class='article'>
       <h1>舆情分析报告</h1>
@@ -275,3 +276,22 @@ def render_html(report: dict) -> str:
     </article>
     """
     return html
+def build_trend(docs: list[dict]):
+    import re
+    from collections import Counter
+    # 提取 yyyy-mm-dd 或 yyyy/mm/dd 或 中文日期（yyyy年m月d日）
+    pat = re.compile(r"(20\d{2})[-/\.](\d{1,2})[-/\.](\d{1,2})")
+    pat_cn = re.compile(r"(20\d{2})年(\d{1,2})月(\d{1,2})日")
+    cnt = Counter()
+    for d in docs:
+        text = (d.get("content") or "")[:8000]
+        for m in pat.findall(text):
+            y,mm,dd = m
+            key = f"{y}-{int(mm):02d}-{int(dd):02d}"
+            cnt[key] += 1
+        for m in pat_cn.findall(text):
+            y,mm,dd = m
+            key = f"{y}-{int(mm):02d}-{int(dd):02d}"
+            cnt[key] += 1
+    points = [{"date": k, "count": v} for k, v in sorted(cnt.items())]
+    return points

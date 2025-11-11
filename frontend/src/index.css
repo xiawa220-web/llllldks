@@ -30,8 +30,10 @@ body{ background-color: rgb(var(--background)); color: rgb(var(--foreground)); }
 @keyframes spin{ to { transform: rotate(360deg); } }
 
 /* 页面容器与两列布局 */
-.page{ max-width: 1100px; margin: 0 auto; padding: 16px; }
+.page{ max-width: 900px; margin: 0 auto; padding: 16px; }
 .grid-2{ display:grid; gap:12px; grid-template-columns: 1fr; }
 @media (min-width: 768px){
   .grid-2{ grid-template-columns: 1fr 1fr; }
 }
+.brand{ font-size: 40px; font-weight: 900; letter-spacing: 1px; }
+.card-tall{ min-height: 360px; }

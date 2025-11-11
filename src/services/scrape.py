@@ -14,9 +14,13 @@ AD_KEYWORDS = [
 
 # 域名优先/黑名单：优先保留国内主流媒体，剔除百科/素材站等非新闻源
 WHITELIST_DOMAINS = {
-    "thepaper.cn", "jiemian.com", "sina.com.cn", "news.sina.com.cn",
-    "163.com", "news.163.com", "sohu.com", "news.sohu.com",
-    "people.com.cn", "cctv.com", "china.com.cn", "cnr.cn", "chinanews.com.cn"
+    # 新闻与深度媒体
+    "thepaper.cn", "jiemian.com", "yicai.com", "21jingji.com", "nbd.com.cn", # 澎湃、界面、第一财经、21世纪、每日经济新闻
+    "sina.com.cn", "news.sina.com.cn", "163.com", "news.163.com", "sohu.com", "news.sohu.com",
+    # 央媒与权威
+    "people.com.cn", "xinhuanet.com", "cctv.com", "cnr.cn", "chinanews.com.cn", "china.com.cn",
+    # 地方主流（可扩充）
+    "ifeng.com", "news.ifeng.com"
 }
 
 BLACKLIST_DOMAINS = {
