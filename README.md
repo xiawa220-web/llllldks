@@ -10,6 +10,8 @@
 
 ## 开发
 
+![CI](https://github.com/xiawa220-web/llllldks/actions/workflows/ci.yml/badge.svg)
+
 ### 后端
 ```bash
 source .venv/bin/activate
@@ -21,6 +23,12 @@ uvicorn src.app:app --host 0.0.0.0 --port 8000 --reload
 cd frontend
 npm install
 npm run dev # 默认 http://localhost:5173/ 若占用会切换端口
+```
+
+> 生产构建（本地）：
+```bash
+cd frontend
+npm run build
 ```
 
 ## 目录结构
